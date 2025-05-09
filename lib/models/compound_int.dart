@@ -1,9 +1,9 @@
 class CompoundInt {
   CompoundInt.fromString(String string) {
-    final String string_ = string.replaceAll(RegExp(r'\.'), ',');
+    final String string_ = string.replaceAll(RegExp(r','), '.');
     double? parsedDouble = double.tryParse(string_);
     if (parsedDouble != null) {
-      final List<String> elements = string_.split(',');
+      final List<String> elements = string_.split('.');
       switch (elements.length) {
         case 0:
           integerPart = 0;
