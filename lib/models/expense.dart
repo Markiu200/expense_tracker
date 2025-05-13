@@ -1,5 +1,8 @@
 import 'package:expense_tracker/models/compound_int.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final formatter = DateFormat.yMd();
 
 enum Category { food, travel, leisure, work }
 
@@ -27,6 +30,6 @@ class Expense {
   final Category category;
 
   String get formattedDate {
-    return "${date.year}.${date.month}.${date.day}";
+    return formatter.format(date);
   }
 }
