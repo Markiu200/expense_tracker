@@ -86,6 +86,20 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
+              DropdownButton(
+                items:
+                    Category.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category.name),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (value) {
+                  print(value);
+                },
+              ),
               ElevatedButton(
                 onPressed: () {},
                 child: const Text("Save Expense"),
