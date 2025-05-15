@@ -21,6 +21,13 @@ class _NewExpenseState extends State<NewExpense> {
     super.dispose();
   }
 
+  void _presentDatePicker() {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final lastDate = now;
+    showDatePicker(context: context, firstDate: firstDate, lastDate: lastDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,13 +40,35 @@ class _NewExpenseState extends State<NewExpense> {
             keyboardType: TextInputType.text, // default, but good to know about
             decoration: const InputDecoration(label: Text("Title")),
           ),
-          TextField(
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              label: Text("Amount"),
-              prefixText: '\$ ',
-            ),
+          Row(
+            children: [
+              // Flutter has problems with rendering TextField directly inside
+              // Row, thus adding Expanded
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text("Amount"),
+                    prefixText: '\$ ',
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text("Selected Date"),
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Row(
             children: [
