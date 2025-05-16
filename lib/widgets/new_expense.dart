@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:expense_tracker/models/expense.dart'; // to get date formatter
+import 'package:expense_tracker/models/compound_int.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense(this._addExpense, {super.key});
+
+  final void Function(Expense expense) _addExpense;
 
   @override
   State<NewExpense> createState() {
@@ -65,6 +67,16 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
+
+    // If valid
+    widget._addExpense(
+      Expense(
+        title: _titleController.text,
+        amount: CompoundInt.fromString(_amountController.text.toString()),
+        date: _pickedDate!,
+        category: _selectedCategory,
+      ),
+    );
   }
 
   @override
