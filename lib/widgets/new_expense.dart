@@ -3,9 +3,9 @@ import 'package:expense_tracker/models/expense.dart'; // to get date formatter
 import 'package:expense_tracker/models/compound_int.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense(this._addExpense, {super.key});
+  const NewExpense(this._onAddExpense, {super.key});
 
-  final void Function(Expense expense) _addExpense;
+  final void Function(Expense expense) _onAddExpense;
 
   @override
   State<NewExpense> createState() {
@@ -69,7 +69,7 @@ class _NewExpenseState extends State<NewExpense> {
     }
 
     // If valid
-    widget._addExpense(
+    widget._onAddExpense(
       Expense(
         title: _titleController.text,
         amount: CompoundInt.fromString(_amountController.text.toString()),
