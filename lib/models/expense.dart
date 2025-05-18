@@ -33,3 +33,19 @@ class Expense {
     return formatter.format(date);
   }
 }
+
+class ExpenseBucket {
+  const ExpenseBucket({required this.expenses});
+
+  final List<Expense> expenses;
+
+  CompoundInt get totalExpenses {
+    CompoundInt sum = CompoundInt.zero();
+
+    for (final expense in expenses) {
+      sum += expense.amount;
+    }
+
+    return sum;
+  }
+}
