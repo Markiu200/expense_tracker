@@ -8,7 +8,7 @@ class CompoundInt {
         case 0:
           integerPart = 0;
           decimalPart = 0;
-          asString = "0,0";
+          asString = "0.00";
         case 1:
           integerPart = int.parse(elements[0]);
           decimalPart = 0;
@@ -25,6 +25,14 @@ class CompoundInt {
     }
   }
 
+  CompoundInt(this.integerPart, this.decimalPart);
+
+  CompoundInt.zero() {
+    integerPart = 0;
+    decimalPart = 0;
+    asString = "0.00";
+  }
+
   late String asString;
   late int integerPart;
   late int decimalPart;
@@ -32,5 +40,13 @@ class CompoundInt {
   @override
   String toString() {
     return asString;
+  }
+
+  CompoundInt operator +(CompoundInt second) {
+    int integerPart_ = (integerPart + second.integerPart) * 100;
+    int decimalPart_ = decimalPart + second.decimalPart;
+    integerPart_ += decimalPart_ ~/ 100;
+    decimalPart_ %= 100;
+    return CompoundInt(integerPart_, decimalPart_);
   }
 }
