@@ -37,6 +37,9 @@ class Expense {
 class ExpenseBucket {
   const ExpenseBucket({required this.expenses});
 
+  ExpenseBucket.forCategory(List<Expense> allExpenses, category)
+    : expenses = allExpenses.where((element) => false).toList();
+
   final List<Expense> expenses;
 
   CompoundInt get totalExpenses {
