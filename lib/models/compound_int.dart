@@ -25,6 +25,11 @@ class CompoundInt {
     }
   }
 
+  CompoundInt.fromDouble(double number) {
+    integerPart = number.floor();
+    decimalPart = ((number % 1) * 100).floor();
+  }
+
   CompoundInt(this.integerPart, this.decimalPart);
 
   CompoundInt.zero() {
@@ -42,11 +47,23 @@ class CompoundInt {
     return asString;
   }
 
+  double toDouble() {
+    return integerPart + (decimalPart / 100);
+  }
+
   CompoundInt operator +(CompoundInt second) {
     int integerPart_ = (integerPart + second.integerPart) * 100;
     int decimalPart_ = decimalPart + second.decimalPart;
     integerPart_ += decimalPart_ ~/ 100;
     decimalPart_ %= 100;
     return CompoundInt(integerPart_, decimalPart_);
+  }
+
+  bool operator >(CompoundInt second) {
+    return (toDouble() > second.toDouble()) ? true : false;
+  }
+
+  CompoundInt operator /(CompoundInt second) {
+    return CompoundInt.fromDouble(toDouble() / second.toDouble());
   }
 }
