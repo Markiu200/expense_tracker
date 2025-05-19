@@ -35,12 +35,14 @@ class Expense {
 }
 
 class ExpenseBucket {
-  const ExpenseBucket({required this.expenses});
+  const ExpenseBucket({required this.expenses, required this.category});
 
-  ExpenseBucket.forCategory(List<Expense> allExpenses, category)
-    : expenses = allExpenses.where((element) => false).toList();
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+    : expenses =
+          allExpenses.where((element) => element.category == category).toList();
 
   final List<Expense> expenses;
+  final Category category;
 
   CompoundInt get totalExpenses {
     CompoundInt sum = CompoundInt.zero();
